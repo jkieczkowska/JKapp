@@ -34,28 +34,28 @@ if(isset($_SESSION['username'])){
                     <div class="panel-body">
                      <?php
                         include "config.php";
-                        if(isset($_POST['login'])&&isset($_POST['haslo'])){
-                            $login=$_POST['login'];
-                            $haslo=md5($_POST['haslo']);
-                            $stmt=$db->prepare("SELECT*FROM uzytkownik WHERE login=? AND haslo=? ");
-                            $stmt->bindParam(1,$login);
-                            $stmt->bindParam(2,$haslo);
+                        if(isset($_POST['username'])&&isset($_POST['password'])){
+                            $username=$_POST['username'];
+                            $password=md5($_POST['password']);
+                            $stmt=$db->prepare("SELECT*FROM login WHERE username=? AND password=? ");
+                            $stmt->bindParam(1,$username);
+                            $stmt->bindParam(2,$password);
                             $stmt->execute();
                             $row=$stmt->fetch();
-                            $user=$row['login'];
-                            $pass=$row['haslo'];
-                            $name=$row['imie'];
-                            $surname=$row['nazwisko'];
+                            $user=$row['username'];
+                            $pass=$row['password'];
+                            $name=$row['name'];
+                            $surname=$row['surname'];
                             $id=$row['id'];
                             $type=$row['type'];
-                            if($login==$user && $pass==$phaslo){
+                            if($username==$user && $pass==$password){
                                 //session_start();
-                                $_SESSION['login']=$user;
-                                $_SESSION['haslo']=$pass;
+                                $_SESSION['username']=$user;
+                                $_SESSION['password']=$pass;
                                 $_SESSION['id']=$id;
                                 $_SESSION['type']=$type;
-                                $_SESSION['imie']=$name;
-                                $_SESSION['nazwisko']=$surname;
+                                $_SESSION['name']=$name;
+                                $_SESSION['surname']=$surname;
                                 ?>
                                 <script>window.location.href='index.php'</script>
                                 <?php
