@@ -1,11 +1,73 @@
 <?php
-	if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-		$uri = 'https://';
-	} else {
-		$uri = 'http://';
-	}
-	$uri .= $_SERVER['HTTP_HOST'];
-	header('Location: '.$uri.'/dashboard/');
-	exit;
+include "config.php";
+session_start();
+if(!isset($_SESSION['username'])){
+    header('location:login.php');
+}
 ?>
-Something is wrong with the XAMPP installation :-(
+
+
+<!DOCTYPE html>
+<html lang="pl_PL">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>"Justyna Kięczkowska - DIY"</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+
+    <?php
+      include "navbar.php";
+      ?>
+
+        <div class="container">
+            <div class="row">
+
+                <?php
+                include "menu.php";
+                ?>
+
+                <div class="col-md-9">
+                    <div class="jumbotron">
+                             <?php
+                              if($_SESSION['type']=='Administrator'){
+
+                              ?>
+                              <h1>Witaj Justyno!</h1>
+                              <p>Co chciałabyś dodać nowego na stronę?</p>
+                              <?php
+                              }else{
+
+                              ?>
+                              <h1>Witaj użytkowniku!</h1>
+                              <p>Witamy na stronie Justyny!</p>
+                               <?php
+                              }
+
+                              ?>
+                              <p><a class="btn btn-primary btn-lg" href="#" role="button">Dowiedz się więcej</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
