@@ -1,8 +1,8 @@
 <div class="col-md-3">
                     <ul class="list-group">
-                      <a href="news.php" class="list-group-item">O mnie</a>
+                      <a href="omnie.php" class="list-group-item">O mnie</a>
 					  <a href="galeria.php" class="list-group-item">Zobacz galerię</a>
-					  <a href="kontakt.php" class="list-group-item">Kontakt</a> 
+					  <a href="dane.php" class="list-group-item">Kontakt</a> 
                       
                           <?php
                           if($_SESSION['type']=='Administrator'){

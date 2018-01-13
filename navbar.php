@@ -16,9 +16,9 @@
               <ul class="nav navbar-nav">
                  <li class="active"><a href="index.php">Strona główna <span class="sr-only">(current)</span></a></li>
 
-                <li><a href="news.php">O mnie</a></li>
+                <li><a href="omnie.php">O mnie</a></li>
 				<li><a href="galeria.php">Zobacz galerię</a></li>
-                <li><a href="data.php">Kontakt</a></li>
+                <li><a href="dane.php">Kontakt</a></li>
                 <?php
                   if($_SESSION['type']=='Administrator'){
 
@@ -53,12 +53,7 @@
                   }
                   ?>
               </ul>
-              <form class="navbar-form navbar-left">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Szukaj</button>
-              </form>
+              
               <ul class="nav navbar-nav navbar-right">
                 <li><a href="logout.php">Logout</a></li>
                </li>
