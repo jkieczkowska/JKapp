@@ -1,9 +1,6 @@
 <?php
 include "config.php";
 session_start();
-if(!isset($_SESSION['username'])){
-    header('location:index_nz.php');
-}
 ?>
 
 
@@ -29,35 +26,21 @@ if(!isset($_SESSION['username'])){
 
 
     <?php
-      include "navbar.php";
+      include "navbar_nz.php";
       ?>
 
         <div class="container">
             <div class="row">
 
-                <?php
-                include "menu.php";
-                ?>
-
+                
                 <div class="col-md-9">
                     <div class="jumbotron">
-                             <?php
-                              if($_SESSION['type']=='Administrator'){
-
-                              ?>
-                              <h1>Witaj Justyno!</h1>
-                              <p>Wzbogać swoją stronę o nowe zdjęcia</p>
-                              <?php
-                              }else{
-								   
-                              ?>
-                              <h1>Witaj użytkowniku!</h1>
+                            
                               <p>Witamy na stronie dotyczącej prac wykonanych przez Justynę.</p>
-                               <?php
-                              }
-							  
-                               ?>
-							 
+							   <p>Zaloguj się aby zobaczyć galerię.</p>
+                              
+
+                              
                               
                     </div>
                 </div>
