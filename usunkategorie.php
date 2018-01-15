@@ -1,33 +1,34 @@
 <?php
 include "config.php";
-session_start();
+//session_start();
 if(!isset($_SESSION['username'])){
     header('location:login.php');
 }
 ?>
-<div class="page-header">
-	<h1>Usuń kategorię</h1>
-</div>
 
 <?php
 //sprawdzenie, czy jest zmienna
 
-if( isset($_POST['nazwa']) ){
-$nazwa = $_GET['nazwa'];
+if( isset($_GET['id']) )
+{
+  $id = $_GET['id'];
+
  $connect = mysqli_connect("localhost", "root", "", "jkapp");
  $connect->set_charset("utf8");
 
 //definiuje zapytanie
-$sql = "DELETE FROM kategoria WHERE id = '$nazwa';";
+ $sql = "DELETE FROM kategoria WHERE id = $id;";
+
 $result = mysqli_query($connect, $sql);
 if( $connect->query($sql)== TRUE ){
-	echo '<div class="alert alert-success" role="alert">Kategoria "'.$nazwa.'" została pomyślnie usunięta.</div>'; 
+	echo '<div class="alert alert-success" role="alert">Kategoria "'.$id.'" została pomyślnie usunięta.</div>'; 
+	?>
+                                <script>window.location.href='data.php'</script>
+                                <?php 
+	
 } else {
     echo '<div class="alert alert-danger" role="alert">Błąd przy usuwaniu kategorii o identyfikatorze "'.$nazwa.'".</div>';
 }
-
-
-
 
 }
 ?>
@@ -55,7 +56,7 @@ $result = mysqli_query($connect, $sql);
 while( $tabela = mysqli_fetch_array($result) ){ 
 	echo '<tr>';
 	echo '<td>'.$tabela['id'].'</td><td>'.$tabela['nazwa'].'</td>'; 
-	echo '<td><a href="usunkategorie&nazwa='.$tabela['id'].'" type="button" class="btn btn-xs btn-danger">Usuń kategorię</a></td>';
+	echo '<td><a href="usunkategorie.php?id='.$tabela['id'].'" type="button" class="btn btn-xs btn-danger">Usuń kategorię</a></td>';
 	echo '</tr>';
 }
 

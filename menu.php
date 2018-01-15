@@ -8,10 +8,10 @@
                           if($_SESSION['type']=='Administrator'){
 
                           ?>
-                      <a href="dodajkategorie.php" class="list-group-item">Dodaj Kategorie</a>
-					  <a href="usunkategorie.php" class="list-group-item">Usuń Kategorie</a>
-                      <a href="dodajzdjecia.php" class="list-group-item">Dodaj Zdjęcie</a>
-					  <a href="edytujzdjecia.php" class="list-group-item">Edytuj Zdjęcia</a>
+                      <a href="addCategory.php" class="list-group-item">Dodaj Kategorie</a>
+					  <a href="removeCategory.php" class="list-group-item">Usuń Kategorie</a>
+                      <a href="addPhoto.php" class="list-group-item">Dodaj Zdjęcie</a>
+					  <a href="editPhoto.php" class="list-group-item">Edytuj Zdjęcia</a>
                       <a href="users.php" class="list-group-item">Lista użytkowników</a>
                       <?php
                           }else{ 
