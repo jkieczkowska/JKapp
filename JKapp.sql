@@ -1,101 +1,123 @@
-﻿
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Czas generowania: 14 Sty 2018, 12:15
+-- Wersja serwera: 10.1.29-MariaDB
+-- Wersja PHP: 7.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Utworzenie bazy danych
--- -----------------------------------------------------
-CREATE DATABASE IF NOT EXISTS JKapp DEFAULT  CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-use JKapp;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 
--- -----------------------------------------------------
- -- Table `uzytkownik`
- -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `uzytkownik` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-   `imie` VARCHAR(30) NOT NULL,
-   `nazwisko` VARCHAR(30) NOT NULL,
-  `adres` VARCHAR(50) NOT NULL,
-   `telefon` INT NOT NULL,
-   `email` VARCHAR(30) NOT NULL,
-   `login` VARCHAR(30) NOT NULL,
-   `haslo` VARCHAR(40) NOT NULL,
-   PRIMARY KEY (`id`))
- ENGINE = InnoDB;
- 
- 
- -- -----------------------------------------------------
- -- Table `roles`
- -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `roles` (
-   `id` INT NOT NULL AUTO_INCREMENT,
-   `name` VARCHAR(30) NOT NULL,
-   PRIMARY KEY (`id`))
- ENGINE = InnoDB;
- 
- 
- -- -----------------------------------------------------
- -- Table `users_roles`
- -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `users_roles` (
-   `user_id` INT NOT NULL,
-   `role_id` INT NOT NULL,
-   INDEX `fk_user_roles_uzytkownik_idx` (`user_id` ASC),
-   INDEX `fk_user_roles_roles1_idx` (`role_id` ASC),
-   PRIMARY KEY (`user_id`, `role_id`),
-   CONSTRAINT `fk_user_roles_uzytkownik`
-     FOREIGN KEY (`user_id`)
-     REFERENCES `uzytkownik` (`id`)
-     ON DELETE NO ACTION
-     ON UPDATE NO ACTION,
-   CONSTRAINT `fk_user_roles_roles1`
-     FOREIGN KEY (`role_id`)
-     REFERENCES `roles` (`id`)
-     ON DELETE NO ACTION
-     ON UPDATE NO ACTION)
- ENGINE = InnoDB;
- 
- 
- -- -----------------------------------------------------
- -- Table `kategoria`
- -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `kategoria` (
-   `id_kategorii` INT NOT NULL AUTO_INCREMENT,
-   `nazwa` VARCHAR(30) NOT NULL,
-   PRIMARY KEY (`id_kategorii`))
- ENGINE = InnoDB;
- 
- 
- -- -----------------------------------------------------
- -- Table `zdjecia`
- -- -----------------------------------------------------
- CREATE TABLE IF NOT EXISTS `zdjecia` (
-   `id` INT NOT NULL AUTO_INCREMENT,
-   `id_kategorii` INT NOT NULL,
-   PRIMARY KEY (`id`),
-   INDEX `fk_zdjecie_kategoria1_idx` (`id_kategorii` ASC),
-   CONSTRAINT `fk_zdjecie_kategoria1`
-     FOREIGN KEY (`id_kategorii`)
-     REFERENCES `kategoria` (`id_kategorii`)
-     ON DELETE NO ACTION
-     ON UPDATE NO ACTION)
- ENGINE = InnoDB;
- 
- 
- 
- SET SQL_MODE=@OLD_SQL_MODE;
- SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
- SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
- 
- 
- 
- 
- INSERT INTO roles (id,name) VALUES (1,'admin');
- INSERT INTO uzytkownik(id,login,email,haslo) VALUES (1,'admin','admin@admin.pl',sha1('P@$$word'));
- INSERT INTO users_roles(user_id,role_id) VALUES (1,1);
- 
- 
- 
+--
+-- Baza danych: `jkapp`
+--
+CREATE DATABASE IF NOT EXISTS `jkapp` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `jkapp`;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategoria`
+--
+
+CREATE TABLE `kategoria` (
+  `id` int(11) NOT NULL,
+  `nazwa` varchar(30) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `kategoria`
+--
+
+INSERT INTO `kategoria` (`id`, `nazwa`) VALUES
+(1, 'Boże Narodzenie');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `login`
+--
+
+CREATE TABLE `login` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `type` enum('Administrator','Member') NOT NULL DEFAULT 'Member',
+  `name` varchar(100) NOT NULL,
+  `surname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Zrzut danych tabeli `login`
+--
+
+INSERT INTO `login` (`id`, `username`, `password`, `type`, `name`, `surname`, `email`) VALUES
+(0, 'admin', 'df009ccbc83c31176438688df70a0667', 'Administrator', 'Justyna KiÄ™czkowska', 'KiÄ™czkowska', 'justynafelicyta@op.pl'),
+(0, 'jan1', '207023ccb44feb4d7dadca005ce29a64', 'Member', 'Jan', 'Nowak', 'jan.n@gmail.com'),
+(0, 'AnnA', '207023ccb44feb4d7dadca005ce29a64', 'Member', 'Anna', 'Kowalska', 'akowalska@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zdjecia`
+--
+
+CREATE TABLE `zdjecia` (
+  `id` int(11) NOT NULL,
+  `id_kategorii` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indexes for table `kategoria`
+--
+ALTER TABLE `kategoria`
+  ADD PRIMARY KEY (`id`) USING BTREE;
+
+--
+-- Indexes for table `zdjecia`
+--
+ALTER TABLE `zdjecia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_zdjecie_kategoria1_idx` (`id_kategorii`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `kategoria`
+--
+ALTER TABLE `kategoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `zdjecia`
+--
+ALTER TABLE `zdjecia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `zdjecia`
+--
+ALTER TABLE `zdjecia`
+  ADD CONSTRAINT `fk_zdjecie_kategoria1` FOREIGN KEY (`id_kategorii`) REFERENCES `kategoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

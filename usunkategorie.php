@@ -1,9 +1,5 @@
 <?php
 include "config.php";
-//session_start();
-if(!isset($_SESSION['username'])){
-    header('location:login.php');
-}
 ?>
 
 <?php
@@ -18,13 +14,13 @@ if( isset($_GET['id']) )
 
 //definiuje zapytanie
  $sql = "DELETE FROM kategoria WHERE id = $id;";
-
-$result = mysqli_query($connect, $sql);
+ $result = mysqli_query($connect, $sql);
 if( $connect->query($sql)== TRUE ){
-	echo '<div class="alert alert-success" role="alert">Kategoria "'.$id.'" została pomyślnie usunięta.</div>'; 
-	?>
-                                <script>window.location.href='data.php'</script>
+								?>
+                                <script>window.location.href='removeCategory.php'</script>
                                 <?php 
+	echo '<div class="alert alert-success" role="alert">Kategoria "'.$id.'" została pomyślnie usunięta.</div>'; 
+	
 	
 } else {
     echo '<div class="alert alert-danger" role="alert">Błąd przy usuwaniu kategorii o identyfikatorze "'.$nazwa.'".</div>';

@@ -26,22 +26,22 @@
                 <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dodaj <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="dodajzdjecia.php">Dodaj zdjęcia</a></li>
-						<li><a href="dodajkategorie.php">Dodaj kategorię</a></li>
+						<li><a href="addPhoto.php">Dodaj zdjęcia</a></li>
+						<li><a href="addCategory.php">Dodaj kategorię</a></li>
 					</ul>
 				</li>
     
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Edytuj <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="edytujzdjecia.php">Edytuj zdjęcia</a></li>
+						<li><a href="editPhoto.php">Edytuj zdjęcia</a></li>
 					</ul>
 				</li>
     
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Usuń <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="usunkategorie.php">Usuń kategorię</a></li>
+						<li><a href="removeCategory.php">Usuń kategorię</a></li>
 					</ul>
 				</li>
                 <?php
