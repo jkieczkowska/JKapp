@@ -1,6 +1,8 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background-color: red;
+  background: url(../css/tlo.jpg);
 }
 
 .navbar {

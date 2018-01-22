@@ -18,7 +18,7 @@ if($_SESSION['type']!='Administrator'){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Justyna Kięczkowska - DIY"</title>
+    <title>Użytkownicy</title>
 
 
     <!-- JQuery -->
@@ -31,7 +31,7 @@ if($_SESSION['type']!='Administrator'){
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+	<link rel="stylesheet" href="css/style2.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,11 +54,12 @@ if($_SESSION['type']!='Administrator'){
                 ?>
 
                 <div class="col-md-9">
-                      <h3 align="center">Lista użytkowników</h3>
+					<h3 align="center">Lista użytkowników</h3>
                 <br />
                 <div class="table-responsive">
                      <table id="user_data" class="table table-striped table-bordered">
                           <thead>
+									
                                <tr>
                                     <td>Imię</td>
                                     <td>Nazwisko</td>
@@ -82,7 +83,8 @@ if($_SESSION['type']!='Administrator'){
                           }
                           ?>
                      </table>
-                </div>
+                
+				</div>
                 </div>
             </div>
         </div>

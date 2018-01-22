@@ -1,0 +1,22 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: url(../css/tlo2.jpg) center no-repeat;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+a.thumbnail img{
+	height:200px;
+}
+.jumbotron {
+	
+	background-color: #FFFF99;
+}
+
+.col-md-3 ul a {
+	
+	background-color: #6EBE9F;
+}

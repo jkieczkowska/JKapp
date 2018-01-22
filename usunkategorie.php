@@ -23,7 +23,7 @@ if( $connect->query($sql)== TRUE ){
 	
 	
 } else {
-    echo '<div class="alert alert-danger" role="alert">Błąd przy usuwaniu kategorii o identyfikatorze "'.$nazwa.'".</div>';
+    echo '<div class="alert alert-danger" role="alert">Błąd przy usuwaniu kategorii o identyfikatorze "'.$id.'".</div>';
 }
 
 }
