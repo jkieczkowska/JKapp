@@ -123,11 +123,6 @@ if(!isset($_SESSION['username'])){
 
 							$i = 0;
 							while( $tabelax = mysqli_fetch_array($result) ){ 
-								//echo '<tr>';
-								//echo '<td>'.$tabela['id'].'</td><td>'.$tabela['nazwa'].'</td>'; 
-								//echo '<td><a href="usunkategorie.php?id='.$tabela['id'].'" type="button" class="btn btn-xs btn-danger">Usuń kategorię</a></td>';
-								//echo '</tr>';
-								//echo "nazwa ->".$tabelax['id'];
 								
 								$tab[$i] = $katalog.'/'.$tabelax['id'].'.jpg';
 								$i++;
@@ -137,7 +132,7 @@ if(!isset($_SESSION['username'])){
 							$katalogMiniaturki = "img";
 
 							//ilość zdjęć na stronie
-							$naStronie = 12;
+							$naStronie = 6;
 
 							//czy ma być opis zdjęcia - jego numer - true to tak, false to nie
 							$opisZdjecia = true;
@@ -182,16 +177,16 @@ if(!isset($_SESSION['username'])){
 							<?php
 							echo "<br>";
 							//link do poprzedniej strony
-							if($strona > 0) echo '<li><a href="galeria3.php?strona='.($strona).'" >[<]</a></li>';
+							if($strona > 0) echo '<li><a href="galeria3.php?strona='.($strona)."&kategoria=".($kategoria).'" >[<]</a></li>';
 
 							for($i = 1; $i <= $iloscStron; ++$i){
 							//linki do poszczególnych stron
-							  echo '<li><a href="galeria3.php?strona='.$i.'" >['.$i.']</a></li>';
+							  echo '<li><a href="galeria3.php?strona='.$i."&kategoria=".($kategoria).'" >['.$i.']</a></li>';
 							}
 							//echo $linki;
 
 							//link do następnej strony
-							if($strona < ($iloscStron - 1)) echo '<li><a href="galeria3.php?strona='.($strona+2).'" >[>]</a></li>';
+							if($strona < ($iloscStron - 1)) echo '<li><a href="galeria3.php?strona='.($strona+2)."&kategoria=".($kategoria).'" >[>]</a></li>';
 							?>
 							</ul>
 							</div>

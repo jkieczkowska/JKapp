@@ -129,7 +129,7 @@ if(!isset($_SESSION['username'])){
 								?>
 
 								<div class="page-header">
-									<h1>Edycja zdjęć <span class="label label-default">Krok 2/2: wybierz zdjęcie</span></h1><a href="edytujzdjecia.php?kategoria=<?php echo $kategoria; ?>"  class="btn btn-xs btn-primary">Przejdź do innej kategorii</a>
+									<h1>Edycja zdjęć <span class="label label-default">Krok 2/2: wybierz zdjęcie</span></h1><a href="edytujzdjecia.php" class="btn btn-xs btn-primary">Przejdź do innej kategorii</a>
 								</div>
 
 								<div class="row">
