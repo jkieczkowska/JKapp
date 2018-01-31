@@ -10,7 +10,7 @@ if(!isset($_SESSION['username'])){
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kategorie prac</title>
+    <title>Edytuj zdjęcia</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,16 +28,14 @@ if(!isset($_SESSION['username'])){
       ?>
         <div class="container">
             <div class="row">
-
                 <?php
                 include "menu.php";
                 ?>
-
                 <div class="col-md-9">
                     <div class="panel panel-default">
                     <div class="panel-body">
                      <?php
-                        include "dodajkategorie.php";
+                        include "edytujzdjecia.php";
                      ?>
                     </div>
                 </div>

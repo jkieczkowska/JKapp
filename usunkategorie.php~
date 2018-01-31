@@ -1,15 +1,30 @@
 <?php
 include "config.php";
 
+//$db = Db::getInstance();
+
 if(isset($_GET['id']))
 {
  $id = $_GET['id'];
+ 
+ echo "1adsfasd";
+
  $db = Db::getInstance();
+ echo "2adsfasd";
+
+ $results = Db::getDeleteFromCategory($id)
+ echo "3adsfasd";
+
  if($results = Db::getDeleteFromCategory($id))
  {
-  echo '<div class="alert alert-success" role="alert">Kategoria "'.$id.'" została pomyślnie usunięta.</div>';   		
+  echo "skasowano";
+?>
+ <script>window.location.href='removeCategory.php'</script>
+<?php 
+  echo '<div class="alert alert-success" role="alert">Kategoria "'.$id.'" została pomyślnie usunięta.</div>'; 		
  } else 
  {
+  echo "dupa";
   echo '<div class="alert alert-danger" role="alert">Błąd przy usuwaniu kategorii o identyfikatorze "'.$nazwa.'".</div>';
  }
 }
@@ -26,6 +41,7 @@ if(isset($_GET['id']))
     </tr>
    </thead>
   <tbody>
+
 <?php
  $db = Db::getInstance();
  $results = Db::getCategoryList();
@@ -37,6 +53,7 @@ if(isset($_GET['id']))
   echo '</tr>';
  }
 ?>
+
   </tbody>
  </table>
 </div>

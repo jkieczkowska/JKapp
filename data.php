@@ -1,17 +1,10 @@
 <?php
-include "config.php";
-session_start();
-if(!isset($_SESSION['username'])){
-    header('location:index.php');
-
-}
-?>
-
-<?php
- $connect = mysqli_connect("localhost", "root", "", "jkapp");
- $connect->set_charset("utf8");
- $query ="SELECT * FROM kategoria ORDER BY id ASC";
- $result = mysqli_query($connect, $query);
+ include "config.php";
+ session_start(); 
+ if(!isset($_SESSION['username']))
+ {
+  header('location:index.php');
+ }
  ?>
 <!DOCTYPE html>
 <html lang="pl_PL">
@@ -21,13 +14,8 @@ if(!isset($_SESSION['username'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kategorie prac"</title>
-
-
     <!-- JQuery -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
-
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
@@ -43,11 +31,9 @@ if(!isset($_SESSION['username'])){
   </head>
   <body>
 
-           <?php
+      <?php
       include "navbar.php";
       ?>
-
-
         <div class="container">
             <div class="row">
 
@@ -64,22 +50,19 @@ if(!isset($_SESSION['username'])){
                                <tr>
                                     <td>Id</td>
                                     <td>Nazwa</td>
-                                    
-
                                </tr>
                           </thead>
                           <?php
-                          while($row = mysqli_fetch_array($result))
+                          $db = Db::getInstance();
+                          $results = Db::getCategoryList();
+                          foreach ($results as $row)
                           {
                                echo '
                                <tr>
                                     <td>'.$row["id"].'</td>
                                     <td>'.$row["nazwa"].'</td>
-                                    
-
                                </tr>
                                ';
-
                           }
                           ?>
                      </table>
@@ -87,8 +70,6 @@ if(!isset($_SESSION['username'])){
                 </div>
             </div>
         </div>
-
-
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 

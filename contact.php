@@ -1,13 +1,9 @@
 <?php
-include "config.php";
 session_start();
 if(!isset($_SESSION['username'])){
     header('location:index.php');
-
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -16,13 +12,8 @@ if(!isset($_SESSION['username'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Justyna Kięczkowska - DIY</title>
-
-
     <!-- JQuery -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
-
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
@@ -38,42 +29,27 @@ if(!isset($_SESSION['username'])){
   </head>
   <body>
 
-           <?php
+      <?php
       include "navbar.php";
       ?>
-
-
         <div class="container">
             <div class="row">
 
                 <?php
                 include "menu.php";
                 ?>
-
                 <div class="col-md-9">
                     <div class="jumbotron">
-                             <?php
-							   echo "<img src=\"kontakt.png\" border=\"0\" width=\"200\" height=\"200\" style=\"float: right\" />";
-							  ?>
-							  <h1>Dane kontaktowe:</h1>
-                              <p>Justyna Kięczkowska</p>
-                              <p>Adres mailowy: justynafelicyta@op.pl</p>
-							  <p>Telefon: 123 456 789</p>
-                              
-                               <?php
-                              							  
-                               ?>
-							 
-                              
+                      <img src="kontakt.png" border="0" width="200" height="200" style="float: right" />
+                      <h1>Dane kontaktowe:</h1>
+                      <p>Justyna Kięczkowska</p>
+                      <p>Adres mailowy: justynafelicyta@op.pl</p>
+                      <p>Telefon: 123 456 789</p>
                     </div>
                 </div>
             </div>
-        <//div>
-
-
-
+        </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>

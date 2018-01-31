@@ -5,27 +5,15 @@ if($_SESSION['type']!='Administrator'){
     header('location:index.php');
 }
 ?>
-
-<?php
- $connect = mysqli_connect("localhost", "root", "", "jkapp");
- $connect->set_charset("utf8");
- $query ="SELECT * FROM login ORDER BY ID DESC";
- $result = mysqli_query($connect, $query);
- ?>
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Użytkownicy</title>
-
-
+    <title>Justyna Kięczkowska - DIY</title>
     <!-- JQuery -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
-
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
@@ -40,26 +28,20 @@ if($_SESSION['type']!='Administrator'){
     <![endif]-->
   </head>
   <body>
-
            <?php
       include "navbar.php";
       ?>
-
-
         <div class="container">
             <div class="row">
-
                 <?php
                 include "menu.php";
                 ?>
-
                 <div class="col-md-9">
-					<h3 align="center">Lista użytkowników</h3>
+                      <h3 align="center">Lista użytkowników</h3>
                 <br />
                 <div class="table-responsive">
                      <table id="user_data" class="table table-striped table-bordered">
                           <thead>
-									
                                <tr>
                                     <td>Imię</td>
                                     <td>Nazwisko</td>
@@ -69,30 +51,25 @@ if($_SESSION['type']!='Administrator'){
                                </tr>
                           </thead>
                           <?php
-                          while($row = mysqli_fetch_array($result))
+                          $db = Db::getInstance();
+                          $results = Db::getUsersList();
+                          foreach ($results as $row) 
                           {
-                               echo '
-                               <tr>
+                               echo '<tr>
                                     <td>'.$row["name"].'</td>
                                     <td>'.$row["surname"].'</td>
                                     <td>'.$row["username"].'</td>
                                     <td>'.$row["email"].'</td>
                                     <td>'.$row["type"].'</td>
-                               </tr>
-                               ';
+                               </tr>';
                           }
                           ?>
                      </table>
-                
-				</div>
+                </div>
                 </div>
             </div>
         </div>
-
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
@@ -101,4 +78,4 @@ if($_SESSION['type']!='Administrator'){
  $(document).ready(function(){
       $('#user_data').DataTable();
  });
- </script>
+</script>

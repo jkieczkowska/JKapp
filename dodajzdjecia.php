@@ -1,47 +1,38 @@
 <?php
 include "config.php";
-//sprawdzenie, czy jest wysłany formularz
-if( $_POST )
-{
-	//deklarowanie zmiennych
-	$kategoria = $_POST['kategoria'];
 
-	//DODANIE PLIKU DO BAZY DANYCH
-	//pobieranie danych do połączenia
-	$connect = mysqli_connect("localhost", "root", "", "jkapp");
-	$connect->set_charset("utf8");
- 	
-	//definiuje zapytanie - pobiera ostatni ID z tabeli zdjęcia
-	$sql = "SELECT MAX(id) FROM zdjecia;";
-	
-	$result = mysqli_query($connect, $sql);
-	while( $row = mysqli_fetch_array($result) )
-	{
-		//przypisuje ostatni ID zmiennej $najwiekszeID i powiększa o 1
-		$najwiekszeID = $row[0]+1;
-	}
-	
+//sprawdzenie, czy jest wysłany formularz
+
+
+if(isset($_POST['kategoria']))
+{
+	$kategoria = $_POST['kategoria'];
+	//deklarowanie zmiennych
+	// https://stackoverflow.com/questions/3532776/replace-null-with-0-in-mysql
+	//$stmt = $db->prepare("SELECT IFNULL(max(id), -1) FROM zdjecia;"); 
+	//$stmt->execute(); 
+	//$row = $stmt->fetch();
+	//$najwiekszeID = $row['0'] + 1;
 	//echo "nid = ".$najwiekszeID."  <br> ";
-	
 	//echo "ilosc = ".count($_FILES['plik']['size']);
-	
-	
-	//WYSYŁANIE PLIKU NA SERWER
+
 	for( $i=0; $i<count($_FILES['plik']['size']); $i++ )
 	{ 
-		//echo "do dodania". $_FILES['plik']['type'][$i];
-
-		if( strstr($_FILES['plik']['type'][$i], 'image')!==false )
+		//echo "do dodania = ". $_FILES['plik']['name'][$i]."<br>";
+		if(strstr($_FILES['plik']['type'][$i], 'image') !== false )
 		{ 
+			$nazwa = $_FILES['plik']['name'][$i];
 			//zmienia nazwę pliku, by zgadzały się z ID w bazie danych
-			$file = 'img/'.$najwiekszeID.'.jpg'; 
+			$file = 'img/'.$nazwa; 
 			//wysyła plik na serwer
 			move_uploaded_file($_FILES['plik']['tmp_name'][$i], $file); 
 
 			//dodaje wpis do bazy danych
-			$sql = "INSERT INTO zdjecia SET id_kategorii = '$kategoria';";
+			//$sql = "INSERT INTO zdjecia values (id_kategorii, nazwa) values (?,?);";
 			//wyświetlenie komunikatu o powodzeniu, lub niepowodzeniu
-			if( $connect->query($sql)== TRUE )
+			echo "blabla $nazwa $kategoria";
+			$db = Db::getInstance();
+			if($results = Db::addPhotoToCategory($nazwa, $kategoria))
 			{
 				?>
 					<script>window.location.href='addPhoto.php'</script>
@@ -55,32 +46,32 @@ if( $_POST )
 			}
 			
 			//wyświetla komunikat o powodzeniu
-			echo '<div class="alert alert-success" role="alert">Zdjęcia zostały zapisane na serwerze.</div>';
+			//echo '<div class="alert alert-success" role="alert">Zdjęcia zostały zapisane na serwerze.</div>';
 			//zwiększa ID dla kolejnych zdjęć w pętli
-			$najwiekszeID++;
+			//$najwiekszeID++;
 		} 
 	}
-} else
+}
+ //else
 	//echo "Brak kategorii";
 ?>
 
 <div class="row">
 	<div class="col-md-5">
-		<form action="dodajzdjecia.php" method="post" enctype="multipart/form-data">
+		<form action="addPhoto.php" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="MAX_FILE_SIZE" value="6000000" />
 			<div class="form-group">
 				<label for="kategoria">Wybierz kategorię</label>
-				<select id="kategoria" name="kategoria" class="form-control">
+				<select id="kategoria" name="kategoria" class="form-control" value="1">
 
 				<?php
 					//pobieranie danych do połączenia
-					$connect = mysqli_connect("localhost", "root", "", "jkapp");
-					 $connect->set_charset("utf8");
-					//definiuje zapytanie
-					$sql = "SELECT id, nazwa FROM kategoria;";
-					$result = mysqli_query($connect, $sql);
-					//wyświetla wynik
-					while( $tabela = mysqli_fetch_array($result) ){ 
-						echo '<option value="'.$tabela['id'].'">'.$tabela['nazwa'].'</option>'; 
+					//foreach($db->query('SELECT id, nazwa FROM kategoria;') as $tabela) 
+					$db = Db::getInstance();
+					$results = Db::getCategoryList();
+					foreach ($results as $row)
+					{
+						echo '<option value="'.$row['id'].'">'.$row['nazwa'].'</option>'; 
 					}
 				?>
 				

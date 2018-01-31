@@ -4,9 +4,9 @@ session_start();
 if(!isset($_SESSION['username'])){
     header('location:index_nz.php');
 }
+//echo "asdfas2"; 
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -57,16 +57,11 @@ if(!isset($_SESSION['username'])){
                                <?php
                               }
 							  
-                               ?>
-							 
-                              
+                               ?>                              
                     </div>
                 </div>
             </div>
         </div>
-
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

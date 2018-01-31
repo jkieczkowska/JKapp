@@ -8,7 +8,7 @@
    if (!isset(self::$instance)) 
    {
     $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-     self::$instance = new PDO('mysql:host=localhost;dbname=jkapp','root','', $pdo_options);
+     self::$instance = new PDO('mysql:host=localhost;dbname=jkapp','root','secretpassword', $pdo_options);
    }
    return self::$instance;
   }
@@ -24,8 +24,11 @@
   }
   public static function getDeleteFromCategory($id) 
   {
+   echo "222222222222222222222";
     $stmt = self::$instance->prepare('DELETE FROM kategoria WHERE id = '.$id.';');
     return $stmt->execute();
+    //$db = Db::getInstance();
+    //if($results = Db::getDeleteFromCategory($id))
   } 
   public static function addCategory($nazwa)
   {
@@ -55,10 +58,8 @@
   }
   public static function changePhotoDescription($id, $description)
   {
-	  
    $stmt = self::$instance->prepare('UPDATE zdjecia SET opis = "'.$description.'" WHERE id = '.$id.';');
    return $stmt->execute();
-   //    
   }    
  }
 ?>

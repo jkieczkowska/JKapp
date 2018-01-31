@@ -21,7 +21,7 @@ if(isset($_POST['kategoria']))
 	hs.transitions = ['expand', 'crossfade'];
 	hs.outlineType = 'rounded-white';
 	hs.fadeInOut = true;
-	hs.dimmingOpacity = 0.75;
+	//hs.dimmingOpacity = 0.75;
 
 	// Add the controlbar
 	if (hs.addSlideshow) hs.addSlideshow({
@@ -44,6 +44,14 @@ if(isset($_POST['kategoria']))
 	<label for="kategoria">Wybierz kategorię</label>
     <select id="kategoria" name="kategoria" class="form-control">
 <?php
+//pobieranie danych do połączenia
+//$connect = mysqli_connect("localhost", "root", "", "jkapp");
+//$connect->set_charset("utf8");
+//definiuje zapytanie
+//$sql = "SELECT id, nazwa FROM kategoria;";
+//$result = mysqli_query($connect, $sql);
+//wyświetla wynik
+//while( $tabela = mysqli_fetch_array($result) ){
 
 	echo '<option value="all"';
 	if($kategoria == "all") echo ' selected="selected" ';
@@ -66,24 +74,31 @@ if(isset($_POST['kategoria']))
 <ul>
 <?php
 
-
-//katalog z obrazkami
+//echo "sql = $sql";
+//$ilosc = mysqli_num_rows( $result);
+//katalog z dużymi obrazkami
 $katalog = "img";
 
 $i = 0;
-
+//while( $tabelax = mysqli_fetch_array($result) ){ 
+//if(is_numeric($kategoria))
+//	$sql = "SELECT id, id_kategorii, nazwa FROM zdjecia where id_kategorii = $kategoria;";
+//else
+//	$sql = "SELECT id, id_kategorii, nazwa FROM zdjecia;";
 
 $db = Db::getInstance();
 $results = Db::getPhotoList($kategoria);
 foreach ($results as $tabela)
-
+//foreach($db->query($sql) as $tabela) 
 {
 	$tab[$i] = $katalog.'/'.$tabela['nazwa'];
-	$desc[$i] = $tabela['opis'];
 	$i++;
 }
 
+//print_r($tab);
+
 $ilosc = $i;
+
 //katalog z miniaturkami
 $katalogMiniaturki = "img";
 
@@ -98,12 +113,14 @@ if($ilosc > 0)
 $iloscStron = ceil($ilosc/$naStronie);
 else $iloscStron = 0;
 
-
+//sortowanie tablicy
+if($ilosc > 0)
+sort($tab);
 
 for($i = 0; $i < $ilosc; $i++)
 {
 if($opisZdjecia) $opisZdjecia = '<span>Obrazek nr '.$i.'</span>';
-  $tablica[$i] = '<li><a href="'.$tab[$i].'" class="highslide" onclick="return hs.expand(this)" title="Opis: '.$desc[$i].'"><img width="200" height="133" src="'.str_replace($katalog, $katalogMiniaturki, $tab[$i]).'" alt="Obrazek nr '.$i.'" />'.$opisZdjecia.'</a></li>';
+  $tablica[$i] = '<li><a href="'.$tab[$i].'" class="highslide" onclick="return hs.expand(this)" title="Obrazek nr '.$i.'"><img width="200" height="133" src="'.str_replace($katalog, $katalogMiniaturki, $tab[$i]).'" alt="Obrazek nr '.$i.'" />'.$opisZdjecia.'</a></li>';
 }
 
 if($ilosc <= 0)
@@ -130,15 +147,15 @@ for($i = $poczatek; $i < $koniec; ++$i){
 <?php
 echo "<br>";
 //link do poprzedniej strony
-if($strona > 0) echo '<li><a href="photos.php?strona='.($strona).'" >[<]</a></li>';
+if($strona > 0) echo '<li><a href="galeria3.php?strona='.($strona).'" >[<]</a></li>';
 for($i = 1; $i <= $iloscStron; ++$i){
 //linki do poszczególnych stron
-  echo '<li><a href="photos.php?strona='.$i.'" >['.$i.']</a></li>';
+  echo '<li><a href="galeria3.php?strona='.$i.'" >['.$i.']</a></li>';
 }
-
+//echo $linki;
 
 //link do następnej strony
-if($strona < ($iloscStron - 1)) echo '<li><a href="photos.php?strona='.($strona+2).'" >[>]</a></li>';
+if($strona < ($iloscStron - 1)) echo '<li><a href="galeria3.php?strona='.($strona+2).'" >[>]</a></li>';
 ?>
 </ul>
 </div>
