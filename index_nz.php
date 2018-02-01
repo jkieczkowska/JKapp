@@ -30,23 +30,31 @@ session_start();
       include "navbar_nz.php";
       ?>
 
+       
         <div class="container">
             <div class="row">
 
-                
+                <?php
+					include "menu_nz.php";
+                ?>
+
                 <div class="col-md-9">
                     <div class="jumbotron">
-                            
-                              <p>Witamy na stronie dotyczącej prac wykonanych przez Justynę.</p>
+							  
+							  
+							  
+							  
+							  
+                               <p>Witamy na stronie dotyczącej prac wykonanych przez Justynę.</p>
 							   <p>Zaloguj się aby zobaczyć galerię.</p>
+                              							  
                               
-
-                              
+							 
                               
                     </div>
                 </div>
             </div>
-        </div>
+        <//div>
 
 
 

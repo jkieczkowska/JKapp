@@ -43,12 +43,20 @@ if(!isset($_SESSION['username'])){
                 <div class="col-md-9">
                     <div class="jumbotron">
                              <?php
-                              if($_SESSION['type']=='Administrator'){
+                              if($_SESSION['type']=='Administrator' && $_SESSION['username']=='admin2'){
 
                               ?>
-                              <h1>Witaj Justyno!</h1>
-                              <p>Wzbogać swoją stronę o nowe zdjęcia</p>
-                              <?php
+                              <h1>Witaj Administratorze testowy!</h1>
+			 				  <p>Wzbogać stronę Justyny o nowe zdjęcia lub kategorie</p>
+							  <?php
+							  }else
+											if($_SESSION['type']=='Administrator'){
+												?>
+													<h1>Witaj Justyno!</h1>
+													<p>Wzbogać swoją stronę o nowe zdjęcia</p>
+                              
+												<?php
+												
                               }else{
 								   
                               ?>

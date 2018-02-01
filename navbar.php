@@ -45,6 +45,7 @@
 						<li><a href="removeCategory.php">Usuń kategorię</a></li>
 					</ul>
 				</li>
+				 <li><a href="users.php">Lista użytkowników</a></li>
                 <?php
                   }else{
                   ?>

@@ -30,7 +30,7 @@ if(isset($_POST['kategoria']))
 			//dodaje wpis do bazy danych
 			//$sql = "INSERT INTO zdjecia values (id_kategorii, nazwa) values (?,?);";
 			//wyświetlenie komunikatu o powodzeniu, lub niepowodzeniu
-			echo "blabla $nazwa $kategoria";
+			//echo "blabla $nazwa $kategoria";
 			$db = Db::getInstance();
 			if($results = Db::addPhotoToCategory($nazwa, $kategoria))
 			{

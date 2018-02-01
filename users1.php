@@ -1,17 +1,31 @@
 <?php
+include "config.php";
 session_start();
 if(!isset($_SESSION['username'])){
-    header('location:login.php');
+    header('location:index.php');
+
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
-    <meta charset="utf-8">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- <meta charset="utf-8"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dodaj zdjęcia</title>
+    <title>Użytkownicy</title>
 
+
+    <!-- JQuery -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
@@ -23,29 +37,44 @@ if(!isset($_SESSION['username'])){
     <![endif]-->
   </head>
   <body>
-    <?php
+
+           <?php
       include "navbar.php";
       ?>
+
+
         <div class="container">
             <div class="row">
 
                 <?php
                 include "menu.php";
                 ?>
+
                 <div class="col-md-9">
-                    <div class="panel panel-default">
-                    <div class="panel-body">
-                     <?php
-                        include "dodajzdjecia.php";
-                     ?>                   
+                    <div class="jumbotron">
+							  
+							  <?php
+							  
+                              include "users.php"
+                              							  
+                               ?>
+							 
+                              
                     </div>
                 </div>
-                </div>
             </div>
-        </div>
+        <//div>
+
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
+<script>
+ $(document).ready(function(){
+      $('#costs_data').DataTable();
+ });
+ </script>

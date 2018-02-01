@@ -1,7 +1,8 @@
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  background: url(../css/tlo1.jpg) center no-repeat;
+  padding-right: 60px;
+  background: url(../css/tlo5.jpg) center no-repeat;
 }
 
 .navbar {

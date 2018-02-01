@@ -8,7 +8,7 @@
    if (!isset(self::$instance)) 
    {
     $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-     self::$instance = new PDO('mysql:host=localhost;dbname=jkapp','root','', $pdo_options);
+     self::$instance = new PDO('mysql:host=mysql.cba.pl;dbname=justynafelicyta','jkroot','P@$$word1', $pdo_options);
    }
    return self::$instance;
   }
@@ -55,10 +55,32 @@
   }
   public static function changePhotoDescription($id, $description)
   {
-	  
    $stmt = self::$instance->prepare('UPDATE zdjecia SET opis = "'.$description.'" WHERE id = '.$id.';');
    return $stmt->execute();
-   //    
-  }    
+  }
+    
+  public static function checkUser($username, $email)
+  {
+   $sql = 'SELECT * FROM login WHERE username="'.$username.'" AND email="'.$email.'"';
+   $stmt = self::$instance->query($sql);
+   return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+  
+  public static function checkCredentials($username, $password)
+  {
+   $sql = 'SELECT * FROM login WHERE username="'.$username.'" AND password="'.$password.'"';
+   //echo ">>$sql";
+   $stmt = self::$instance->query($sql);
+   return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+   
+  public static function addUser($username, $password, $name, $surname, $email)
+  {
+   $sql='INSERT INTO login (username, password, name, surname, email) VALUES ("'.$username.'", "'.$password.'", "'.$name.'", "'.$surname.'", "'.$email.'")';
+   //echo ">>$sql";
+   
+   $stmt = self::$instance->prepare($sql);
+   return $stmt->execute();
+  }
  }
 ?>

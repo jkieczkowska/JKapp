@@ -6,7 +6,6 @@ if(isset($_SESSION['username'])){
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pl_PL">
   <head>
@@ -34,36 +33,56 @@ if(isset($_SESSION['username'])){
                 <div class="panel panel-default">
                     <div class="panel-body">
                      <?php
-                        include "config.php";
-                        if(isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['name'])&&isset($_POST['surname'])&&isset($_POST['email'])){
-                            $username=$_POST['username'];
-                            $password=md5($_POST['password']);
-                            $name=($_POST['name']);
-                            $surname=($_POST['surname']);
-                            $email=($_POST['email']);
-                            $stmt=$db->prepare("SELECT*FROM login WHERE username=? AND password=? ");
-                            $stmt->bindParam(1,$username);
-                            $stmt->bindParam(2,$email);
-
-                            $stmt->execute();
-                            $row=$stmt->fetch();
-                            $user=$row['username'];
-                            $ema=$row['email'];
-                            $id=$row['id'];
-                            $type=$row['type'];
-                            if($username!=$user && $email!=$ema){
-                               $sql="INSERT INTO login (username, password, name, surname, email) VALUES ('$username', '$password', '$name', '$surname', '$email')";
-                                if($db->query($sql)== TRUE){
+                        if(isset($_POST['username']) && 
+                           isset($_POST['password']) && 
+                           isset($_POST['name']) &&
+                           isset($_POST['surname'])&&
+                           isset($_POST['email']))
+                           {
+                            $username = $_POST['username'];
+                            $password = md5($_POST['password']);
+                            $name = $_POST['name'];
+                            $surname = $_POST['surname'];
+                            $email= $_POST['email'];
+                            
+                            $db = Db::getInstance();
+                            $row = Db::checkUser($username, $email);
+                             //foreach ($results as $row)
+                            //$stmt=$db->prepare("SELECT * FROM login WHERE username=? AND password=? ");
+                            //$stmt->bindParam(1,$username);
+                            //$stmt->bindParam(2,$email);
+                            //$stmt->execute();
+                            //$row=$stmt->fetch();
+                            
+                            $db_user = $row['username'];
+                            $db_email = $row['email'];
+                            $sb_id = $row['id'];
+                            $sb_type = $row['type'];
+                            
+                            //echo "asdfasd";
+                            
+                            if($username != $db_user && $email != $db_email){
+                              
+                              echo "";
+                            
+                              
+                              $db = Db::getInstance();
+                              
+                                                           echo "";
+ 
+                              if($results = Db::addUser($username, $password, $name, $surname, $email))
+                              {
                                 ?>
                                 <script>window.location.href='login.php'</script>
-                                <?php }
-
-                            }else{
+                                <?php 
+                              }
+                            } else
+                            {
                                 ?>
                                   <div class="alert alert-danger alert-dismissible" role="alert">
                                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                   <strong>UWAGA!</strong> Nazwa użytkownika lub adres email został już dodany.
-</div>
+                                  </div>
                                 <?php
                             }
                         }
@@ -98,10 +117,7 @@ if(isset($_SESSION['username'])){
             </div>
             <div class="col-md-4"></div>
             <div class="col-md-4"></div>
-
    </div>
-
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

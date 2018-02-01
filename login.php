@@ -33,28 +33,21 @@ if(isset($_SESSION['username'])){
                 <div class="panel panel-default">
                     <div class="panel-body">
                      <?php
-                        //include "config.php";
                          
                         if(isset($_POST['username']) && isset($_POST['password'])){
+                            $username = $_POST['username'];
+                            $password = md5($_POST['password']);
                             
-                            $username=$_POST['username'];
-                            $password=md5($_POST['password']);
                             $db = Db::getInstance();
+                            $row = Db::checkCredentials($username, $password);
 
-                            $stmt=$db->prepare("SELECT * FROM login WHERE username=? AND password=? ");
-                            $stmt->bindParam(1, $username);
-                            $stmt->bindParam(2, $password);
-                            $stmt->execute();
-                            $row=$stmt->fetch();
-                            $user=$row['username'];
-                            $pass=$row['password'];
-                            $name=$row['name'];
-                            $surname=$row['surname'];
-                            $id=$row['id'];
-                            $type=$row['type'];
+                            $user = $row['username'];
+                            $pass = $row['password'];
+                            $name = $row['name'];
+                            $surname = $row['surname'];
+                            $id = $row['id'];
+                            $type = $row['type'];
                             
-                            //echo "mamy dane Au".$username." Ap".$password." Bu".$user." Bp".$pass." " ;
-                            //echo "sql".
                             if(($username == $user) && ($pass == $password)){
                               //  //session_start();
                                 $_SESSION['username']=$user;
@@ -66,16 +59,15 @@ if(isset($_SESSION['username'])){
                                 ?>
                                     <script>window.location.href='index.php'</script>
                                 <?php
-                                //echo "wszyko powinno byc ok";
-                                //exit();
                             }else {
                                 ?>
                                   <div class="alert alert-danger alert-dismissible" role="alert">
                                       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <strong>UWAGA!</strong> Niepoprawny login lub hasło.
+									<a href="login.php" class="btn btn-link">Zaloguj</a>
                                 </div>
                                 <?php
-                                echo "jest rozniza a hasle";
+                                echo "Niepoprawny login lub hasło";
                                 exit();
                             }
                               //echo "YYYYYYYYYYYYYYYYYY";

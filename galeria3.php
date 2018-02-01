@@ -2,9 +2,9 @@
 
 include "config.php";
 
-if(isset($_POST['kategoria']))
+if(isset($_GET['kategoria']))
 {
-	$kategoria =( $_POST['kategoria']);
+	$kategoria =( $_GET['kategoria']);
 } else $kategoria = "all";
 
 ?>
@@ -21,7 +21,7 @@ if(isset($_POST['kategoria']))
 	hs.transitions = ['expand', 'crossfade'];
 	hs.outlineType = 'rounded-white';
 	hs.fadeInOut = true;
-	hs.dimmingOpacity = 0.75;
+	//hs.dimmingOpacity = 0.75;
 
 	// Add the controlbar
 	if (hs.addSlideshow) hs.addSlideshow({
@@ -40,10 +40,12 @@ if(isset($_POST['kategoria']))
 </head>
 <body>
 
-<form action="photos.php" method="post" id="nameform">
+<form action="photos.php" method="get" id="nameform">
 	<label for="kategoria">Wybierz kategorię</label>
     <select id="kategoria" name="kategoria" class="form-control">
 <?php
+
+//wyświetla wynik
 
 	echo '<option value="all"';
 	if($kategoria == "all") echo ' selected="selected" ';
@@ -67,23 +69,24 @@ if(isset($_POST['kategoria']))
 <?php
 
 
-//katalog z obrazkami
+//katalog z dużymi obrazkami
 $katalog = "img";
 
 $i = 0;
 
-
 $db = Db::getInstance();
 $results = Db::getPhotoList($kategoria);
 foreach ($results as $tabela)
-
+//foreach($db->query($sql) as $tabela) 
 {
 	$tab[$i] = $katalog.'/'.$tabela['nazwa'];
 	$desc[$i] = $tabela['opis'];
 	$i++;
 }
 
+
 $ilosc = $i;
+
 //katalog z miniaturkami
 $katalogMiniaturki = "img";
 
@@ -98,7 +101,9 @@ if($ilosc > 0)
 $iloscStron = ceil($ilosc/$naStronie);
 else $iloscStron = 0;
 
-
+//sortowanie tablicy
+//if($ilosc > 0)
+//sort($tab);
 
 for($i = 0; $i < $ilosc; $i++)
 {
@@ -107,7 +112,7 @@ if($opisZdjecia) $opisZdjecia = '<span>Obrazek nr '.$i.'</span>';
 }
 
 if($ilosc <= 0)
-	echo "Brak obrazów dla tej kategorii";
+ echo "Brak obrazów dla tej kategorii";
 
 //sprawdza aktualny numer strony
 if(isset($_GET['strona']) && $_GET['strona'] > 0 && $_GET['strona'] <= $iloscStron) 
@@ -127,20 +132,21 @@ for($i = $poczatek; $i < $koniec; ++$i){
 ?>
 </ul>
 <ul id="nawigacja">
-<?php
-echo "<br>";
-//link do poprzedniej strony
-if($strona > 0) echo '<li><a href="photos.php?strona='.($strona).'" >[<]</a></li>';
-for($i = 1; $i <= $iloscStron; ++$i){
-//linki do poszczególnych stron
-  echo '<li><a href="photos.php?strona='.$i.'" >['.$i.']</a></li>';
-}
+						<?php
+							echo "<br>";
+							//link do poprzedniej strony
+							if($strona > 0) echo '<li><a href="photos.php?strona='.($strona)."&kategoria=".($kategoria).'" >[<]</a></li>';
 
+							for($i = 1; $i <= $iloscStron; ++$i){
+							//linki do poszczególnych stron
+							  echo '<li><a href="photos.php?strona='.$i."&kategoria=".($kategoria).'" >['.$i.']</a></li>';
+							}
+							//echo $linki;
 
-//link do następnej strony
-if($strona < ($iloscStron - 1)) echo '<li><a href="photos.php?strona='.($strona+2).'" >[>]</a></li>';
-?>
-</ul>
+							//link do następnej strony
+							if($strona < ($iloscStron - 1)) echo '<li><a href="photos.php?strona='.($strona+2)."&kategoria=".($kategoria).'" >[>]</a></li>';
+							?>
+							</ul>
 </div>
 </body>
 </html>
